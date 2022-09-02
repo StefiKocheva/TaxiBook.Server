@@ -1,4 +1,4 @@
-﻿namespace TaxiBook.Server.Controllers
+﻿namespace TaxiBook.Server.Features
 {
     using Microsoft.AspNetCore.Mvc;
 
