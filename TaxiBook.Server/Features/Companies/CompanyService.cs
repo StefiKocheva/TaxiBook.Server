@@ -30,10 +30,7 @@
 
         public async Task<bool> Update(string id, string name, string description, string userId)
         {
-            var company = await this.data
-                .Companies
-                .Where(c => c.Id == id && c.UserId == userId)
-                .FirstOrDefaultAsync();
+            var company = await this.GetByIdAndByUserId(id, userId);
 
             if (company == null)
             {
@@ -42,6 +39,21 @@
 
             company.Name = name;
             company.Description = description;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+        }
+        public async Task<bool> Delete(string id, string userId)
+        {
+            var company = await this.GetByIdAndByUserId(id, userId);
+
+            if (company == null)
+            {
+                return false;
+            }
+
+            this.data.Companies.Remove(company);
 
             await this.data.SaveChangesAsync();
 
@@ -70,6 +82,12 @@
                     Name = c.Name,
                     Description = c.Description,
                 })
+                .FirstOrDefaultAsync();
+
+        private async Task<Company> GetByIdAndByUserId(string id, string userId) 
+            => await this.data
+                .Companies
+                .Where(c => c.Id == id && c.UserId == userId)
                 .FirstOrDefaultAsync();
     }
 }

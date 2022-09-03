@@ -5,6 +5,8 @@
     using TaxiBook.Server.Features.Companies.Models;
     using TaxiBook.Server.Infrastructure.Extensions;
 
+    using static Infrastructure.WebConstants;
+
     [Authorize]
     public class CompaniesController : ApiController
     {
@@ -20,8 +22,8 @@
             return await this.companyService.ByUser(userId);
         }
 
-        [Route("{id}")]
         [HttpGet]
+        [Route(Id)]
         public async Task<ActionResult<CompanyDetailsServiceModel>> Details(string id)
             => await this.companyService.Details(id);
 
@@ -50,6 +52,22 @@
                 userId);
 
             if (!updated)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route(Id)]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var userId = this.User.GetId();
+
+            var deleted = await this.companyService.Delete(id, userId);
+
+            if (!deleted)
             {
                 return BadRequest();
             }
