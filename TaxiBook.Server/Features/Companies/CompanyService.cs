@@ -1,5 +1,7 @@
 ﻿namespace TaxiBook.Server.Features.Companies
 {
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
     using TaxiBook.Server.Data;
     using TaxiBook.Server.Data.Models;
 
@@ -24,5 +26,16 @@
 
             return company.Id;
         }
+
+        public async Task<IEnumerable<CompanyListingResponseModel>> ByUser(string userId)
+            => await this.data
+                .Companies
+                .Where(c => c.UserId == userId)
+                .Select(c => new CompanyListingResponseModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToListAsync();
     }
 }

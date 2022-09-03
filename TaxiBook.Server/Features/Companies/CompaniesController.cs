@@ -8,8 +8,16 @@
     {
         private readonly ICompanyService companyService;
 
-        public CompaniesController(ICompanyService companyService) 
-            => this.companyService = companyService;
+        public CompaniesController(ICompanyService companyService) => this.companyService = companyService;
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IEnumerable<CompanyListingResponseModel>> Mine()
+        {
+            var userId = this.User.GetId();
+
+            return await this.companyService.ByUser(userId);
+        }
 
         [Authorize]
         [HttpPost]
