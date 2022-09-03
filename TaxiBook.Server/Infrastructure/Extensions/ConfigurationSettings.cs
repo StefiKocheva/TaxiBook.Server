@@ -1,4 +1,4 @@
-﻿namespace TaxiBook.Server.Infrastructure
+﻿namespace TaxiBook.Server.Infrastructure.Extensions
 {
     public static class ConfigurationSettings
     {

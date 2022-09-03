@@ -1,4 +1,4 @@
-﻿namespace TaxiBook.Server.Infrastructure
+﻿namespace TaxiBook.Server.Infrastructure.Extensions
 {
     using Microsoft.AspNetCore.Identity;
     using TaxiBook.Server.Data.Models;
@@ -10,6 +10,7 @@
     using TaxiBook.Server.Features.Companies;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.OpenApi.Models;
+    using TaxiBook.Server.Infrastructure.Filters;
 
     public static class ServiceCollectionExtensions
     {
@@ -45,7 +46,7 @@
         }
 
         public static IServiceCollection AddJwtAuthentication(
-            this IServiceCollection services, 
+            this IServiceCollection services,
             AppSettings appSettings)
         {
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
@@ -81,12 +82,17 @@
             => services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(
-                    "v1", 
-                    new OpenApiInfo 
-                    { 
-                        Title = "My TaxiBook API", 
-                        Version = "v1" 
+                    "v1",
+                    new OpenApiInfo
+                    {
+                        Title = "My TaxiBook API",
+                        Version = "v1"
                     });
             });
+
+        public static void AddApiControllers(this IServiceCollection services)
+            => services
+                .AddControllers(options => options
+                    .Filters.Add<ModelOrNotFoundActionFilter>());
     }
 }

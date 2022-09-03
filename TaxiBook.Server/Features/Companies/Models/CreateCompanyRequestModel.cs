@@ -1,4 +1,4 @@
-﻿namespace TaxiBook.Server.Features.Companies
+﻿namespace TaxiBook.Server.Features.Companies.Models
 {
     using System.ComponentModel.DataAnnotations;
 

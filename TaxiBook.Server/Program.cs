@@ -1,4 +1,4 @@
-using TaxiBook.Server.Infrastructure;
+using TaxiBook.Server.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ builder.Services
     .AddJwtAuthentication(builder.Services.GetApplicationSettings(builder.Configuration))
     .AddApplicationServices()
     .AddSwagger()
-    .AddControllers();
+    .AddApiControllers();
 
 var app = builder.Build();
 
