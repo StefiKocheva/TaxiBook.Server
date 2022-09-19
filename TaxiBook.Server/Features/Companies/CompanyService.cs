@@ -64,6 +64,7 @@
             => await this.data
                 .Companies
                 .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.CreatedOn)
                 .Select(c => new CompanyListingServiceModel
                 {
                     Id = c.Id,

@@ -1,10 +1,11 @@
 ﻿namespace TaxiBook.Server.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using Base;
 
     using static Vallidation.Company;
 
-    public class Company
+    public class Company : DeletableEntity
     {
         public Company()
         {

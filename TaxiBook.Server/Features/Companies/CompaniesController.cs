@@ -4,35 +4,42 @@
     using Microsoft.AspNetCore.Mvc;
     using TaxiBook.Server.Features.Companies.Models;
     using TaxiBook.Server.Infrastructure.Extensions;
-
+    using TaxiBook.Server.Infrastructure.Services;
     using static Infrastructure.WebConstants;
 
     [Authorize]
     public class CompaniesController : ApiController
     {
-        private readonly ICompanyService companyService;
+        private readonly ICompanyService companies;
+        private readonly ICurrentUserService currentUser;
 
-        public CompaniesController(ICompanyService companyService) => this.companyService = companyService;
+        public CompaniesController(
+            ICompanyService companies,
+            ICurrentUserService currentUser)
+        {
+            this.companies = companies;
+            this.currentUser = currentUser;
+        }
 
         [HttpGet]
         public async Task<IEnumerable<CompanyListingServiceModel>> Mine()
         {
-            var userId = this.User.GetId();
+            var userId = this.currentUser.GetId();
 
-            return await this.companyService.ByUser(userId);
+            return await this.companies.ByUser(userId);
         }
 
         [HttpGet]
         [Route(Id)]
         public async Task<ActionResult<CompanyDetailsServiceModel>> Details(string id)
-            => await this.companyService.Details(id);
+            => await this.companies.Details(id);
 
         [HttpPost]
         public async Task<ActionResult<string>> Create(CreateCompanyRequestModel model)
         {
-            var userId = User.GetId();
+            var userId = this.currentUser.GetId();
 
-            var id = await this.companyService.Create(
+            var id = await this.companies.Create(
                 model.Name, 
                 model.Description, 
                 userId);
@@ -43,9 +50,9 @@
         [HttpPut]
         public async Task<ActionResult> Update(UpdateCompanyRequestModel model)
         {
-            var userId = this.User.GetId();
+            var userId = this.currentUser.GetId();
 
-            var updated = await this.companyService.Update(
+            var updated = await this.companies.Update(
                 model.Id,
                 model.Name,
                 model.Description,
@@ -63,9 +70,9 @@
         [Route(Id)]
         public async Task<ActionResult> Delete(string id)
         {
-            var userId = this.User.GetId();
+            var userId = this.currentUser.GetId();
 
-            var deleted = await this.companyService.Delete(id, userId);
+            var deleted = await this.companies.Delete(id, userId);
 
             if (!deleted)
             {
