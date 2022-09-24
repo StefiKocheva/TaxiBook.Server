@@ -1,6 +1,6 @@
 ﻿namespace TaxiBook.Server.Features.Companies
 {
-    using TaxiBook.Server.Features.Companies.Models;
+    using Models;
 
     public interface ICompanyService
     {

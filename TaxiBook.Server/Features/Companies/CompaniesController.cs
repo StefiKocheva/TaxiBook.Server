@@ -1,11 +1,10 @@
 ﻿namespace TaxiBook.Server.Features.Companies
 {
+    using Infrastructure.Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using TaxiBook.Server.Features.Companies.Models;
-    using TaxiBook.Server.Features.Profiles.Models;
-    using TaxiBook.Server.Infrastructure.Extensions;
-    using TaxiBook.Server.Infrastructure.Services;
+    using Models;
+
     using static Infrastructure.WebConstants;
 
     [Authorize]

@@ -1,18 +1,18 @@
 ﻿namespace TaxiBook.Server.Infrastructure.Extensions
 {
-    using Microsoft.AspNetCore.Identity;
-    using TaxiBook.Server.Data.Models;
-    using TaxiBook.Server.Data;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
-    using Microsoft.IdentityModel.Tokens;
     using System.Text;
-    using TaxiBook.Server.Features.Identity;
-    using TaxiBook.Server.Features.Companies;
+    using Data;
+    using Data.Models;
+    using Features.Companies;
+    using Features.Identity;
+    using Features.Profiles;
+    using Filters;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using TaxiBook.Server.Infrastructure.Filters;
-    using TaxiBook.Server.Infrastructure.Services;
-    using TaxiBook.Server.Features.Profiles;
+    using Services;
 
     public static class ServiceCollectionExtensions
     {

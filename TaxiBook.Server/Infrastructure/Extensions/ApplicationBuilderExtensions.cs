@@ -1,9 +1,7 @@
-﻿using TaxiBook.Server.Infrastructure.Extensions;
-
-namespace TaxiBook.Server.Infrastructure.Extensions
+﻿namespace TaxiBook.Server.Infrastructure.Extensions
 {
+    using Data;
     using Microsoft.EntityFrameworkCore;
-    using TaxiBook.Server.Data;
 
     public static class ApplicationBuilderExtensions
     {

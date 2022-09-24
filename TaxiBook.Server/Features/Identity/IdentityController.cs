@@ -1,11 +1,10 @@
 ﻿namespace TaxiBook.Server.Features.Identity
 {
-    using Microsoft.AspNetCore.Authorization;
+    using Data.Models;
+    using Identity.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using TaxiBook.Server.Data.Models;
-    using TaxiBook.Server.Features.Identity.Models;
 
     public class IdentityController : ApiController
     {

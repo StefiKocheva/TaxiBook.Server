@@ -1,10 +1,10 @@
 ﻿namespace TaxiBook.Server.Features.Companies
 {
-    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
-    using TaxiBook.Server.Data;
-    using TaxiBook.Server.Data.Models;
-    using TaxiBook.Server.Features.Companies.Models;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
 
     public class CompanyService : ICompanyService
     {

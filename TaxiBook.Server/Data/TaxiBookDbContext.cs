@@ -1,12 +1,12 @@
 ﻿namespace TaxiBook.Server.Data
 {
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
     using System.Threading;
     using System.Threading.Tasks;
-    using TaxiBook.Server.Data.Models;
-    using TaxiBook.Server.Data.Models.Base;
-    using TaxiBook.Server.Infrastructure.Services;
+    using Infrastructure.Services;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+    using Models.Base;
 
     public class TaxiBookDbContext : IdentityDbContext<User>
     {

@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
-using TaxiBook.Server.Infrastructure.Extensions;
-
-namespace TaxiBook.Server.Infrastructure.Services
+﻿namespace TaxiBook.Server.Infrastructure.Services
 {
+    using System.Security.Claims;
+    using Extensions;
+
     public class CurrentUserService : ICurrentUserService
     {
         private readonly ClaimsPrincipal user;

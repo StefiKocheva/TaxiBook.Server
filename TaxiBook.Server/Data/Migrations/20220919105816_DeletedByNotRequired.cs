@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
+﻿#nullable disable
 
 namespace TaxiBook.Server.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class DeletedByNotRequired : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

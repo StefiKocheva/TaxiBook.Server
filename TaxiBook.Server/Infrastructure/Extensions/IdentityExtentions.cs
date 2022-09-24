@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
-
-namespace TaxiBook.Server.Infrastructure.Extensions
+﻿namespace TaxiBook.Server.Infrastructure.Extensions
 {
-    public static class IddentityExtentions
+    using System.Security.Claims;
+
+    public static class IdentityExtentions
     {
         public static string GetId(this ClaimsPrincipal user)
             => user
