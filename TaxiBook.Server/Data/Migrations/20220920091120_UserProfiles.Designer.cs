@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaxiBook.Server.Data;
 
@@ -11,9 +12,10 @@ using TaxiBook.Server.Data;
 namespace TaxiBook.Server.Data.Migrations
 {
     [DbContext(typeof(TaxiBookDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220920091120_UserProfiles")]
+    partial class UserProfiles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -358,9 +360,12 @@ namespace TaxiBook.Server.Data.Migrations
                                 .HasMaxLength(40)
                                 .HasColumnType("nvarchar(40)");
 
-                            b1.Property<string>("MainPhotoUrl")
+                            b1.Property<string>("ProfilePhotoUrl")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("Role")
+                                .HasColumnType("int");
 
                             b1.HasKey("UserId");
 

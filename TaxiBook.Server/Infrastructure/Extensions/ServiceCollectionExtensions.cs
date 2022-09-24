@@ -12,6 +12,7 @@
     using Microsoft.OpenApi.Models;
     using TaxiBook.Server.Infrastructure.Filters;
     using TaxiBook.Server.Infrastructure.Services;
+    using TaxiBook.Server.Features.Profiles;
 
     public static class ServiceCollectionExtensions
     {
@@ -76,8 +77,9 @@
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services
-                .AddTransient<IIdentityService, IdentityService>()
                 .AddScoped<ICurrentUserService, CurrentUserService>()
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<IProfileService, ProfileService>()
                 .AddTransient<ICompanyService, CompanyService>();
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)

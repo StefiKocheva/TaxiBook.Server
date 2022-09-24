@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using TaxiBook.Server.Features.Companies.Models;
+    using TaxiBook.Server.Features.Profiles.Models;
     using TaxiBook.Server.Infrastructure.Extensions;
     using TaxiBook.Server.Infrastructure.Services;
     using static Infrastructure.WebConstants;
@@ -23,11 +24,7 @@
 
         [HttpGet]
         public async Task<IEnumerable<CompanyListingServiceModel>> Mine()
-        {
-            var userId = this.currentUser.GetId();
-
-            return await this.companies.ByUser(userId);
-        }
+            => await this.companies.ByUser(this.currentUser.GetId());
 
         [HttpGet]
         [Route(Id)]
