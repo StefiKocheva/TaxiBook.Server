@@ -22,5 +22,27 @@
         [Authorize]
         public async Task<ActionResult<ProfileServiceModel>> Mine()
             => await this.profiles.ByUser(this.currentUser.GetId());
+
+        [HttpPut]
+        [Authorize]
+        public async Task<ActionResult> Update(UpdateProfileRequestModel model)
+        {
+            var userId = this.currentUser.GetId();
+
+            var result = await this.profiles.Update(
+                userId,
+                model.Email,
+                model.UserName,
+                model.FirstName,
+                model.LastName,
+                model.MainPhotoUrl);
+
+            if (result.Failure)
+            {
+                return BadRequest(result.Error);
+            }
+
+            return Ok();
+        }
     }
 }

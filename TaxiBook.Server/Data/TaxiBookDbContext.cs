@@ -20,6 +20,8 @@
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<Profile> Profiles { get; set; }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.ApplyAuditInformation();
@@ -46,7 +48,10 @@
 
             builder
                 .Entity<User>()
-                .OwnsOne(u => u.Profile);
+                .HasOne(u => u.Profile)
+                .WithOne()
+                .HasForeignKey<Profile>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

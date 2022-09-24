@@ -44,17 +44,18 @@
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(UpdateCompanyRequestModel model)
+        [Route(Id)]
+        public async Task<ActionResult> Update(string id, UpdateCompanyRequestModel model)
         {
             var userId = this.currentUser.GetId();
 
-            var updated = await this.companies.Update(
-                model.Id,
+            var result = await this.companies.Update(
+                id,
                 model.Name,
                 model.Description,
                 userId);
 
-            if (!updated)
+            if (result.Failure)
             {
                 return BadRequest();
             }
@@ -68,9 +69,8 @@
         {
             var userId = this.currentUser.GetId();
 
-            var deleted = await this.companies.Delete(id, userId);
-
-            if (!deleted)
+            var result = await this.companies.Delete(id, userId);
+            if (result.Failure)
             {
                 return BadRequest();
             }

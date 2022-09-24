@@ -1,20 +1,19 @@
-﻿namespace TaxiBook.Server.Data.Models
+﻿namespace TaxiBook.Server.Features.Profiles.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Vallidation.User;
+    using static Data.Vallidation.User;
 
-    public class Profile
+    public class UpdateProfileRequestModel
     {
-        [Key]
-        [Required]
-        public string UserId { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
-        [Required]
+        public string UserName { get; set; }
+
         [MaxLength(MaxFirstNameLength)]
         public string FirstName { get; set; }
 
-        [Required]
         [MaxLength(MaxLastNameLength)]
         public string LastName { get; set; }
 

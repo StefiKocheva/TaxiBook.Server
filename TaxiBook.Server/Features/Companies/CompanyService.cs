@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Data;
     using Data.Models;
+    using Infrastructure.Services;
     using Microsoft.EntityFrameworkCore;
     using Models;
 
@@ -28,13 +29,12 @@
             return company.Id;
         }
 
-        public async Task<bool> Update(string id, string name, string description, string userId)
+        public async Task<Result> Update(string id, string name, string description, string userId)
         {
             var company = await this.GetByIdAndByUserId(id, userId);
-
             if (company == null)
             {
-                return false;
+                return "This user cannot edit this company.";
             }
 
             company.Name = name;
@@ -44,13 +44,12 @@
 
             return true;
         }
-        public async Task<bool> Delete(string id, string userId)
+        public async Task<Result> Delete(string id, string userId)
         {
             var company = await this.GetByIdAndByUserId(id, userId);
-
             if (company == null)
             {
-                return false;
+                return "This user cannot delete this company.";
             }
 
             this.data.Companies.Remove(company);

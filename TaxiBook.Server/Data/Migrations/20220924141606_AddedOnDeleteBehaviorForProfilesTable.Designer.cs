@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaxiBook.Server.Data;
 
@@ -11,9 +12,10 @@ using TaxiBook.Server.Data;
 namespace TaxiBook.Server.Data.Migrations
 {
     [DbContext(typeof(TaxiBookDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220924141606_AddedOnDeleteBehaviorForProfilesTable")]
+    partial class AddedOnDeleteBehaviorForProfilesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,7 +206,7 @@ namespace TaxiBook.Server.Data.Migrations
 
             modelBuilder.Entity("TaxiBook.Server.Data.Models.Profile", b =>
                 {
-                    b.Property<string>("UserId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
@@ -221,7 +223,14 @@ namespace TaxiBook.Server.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Profiles");
                 });

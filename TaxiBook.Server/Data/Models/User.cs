@@ -5,7 +5,7 @@
 
     public class User : IdentityUser, IEntity
     {
-        public Profile Profile { get; set; }
+        public Profile Profile { get; set; } 
 
         public DateTime? CreatedOn { get; set; }
 
