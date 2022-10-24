@@ -17,5 +17,10 @@
 
             public const int MaxLastNameLength = 40;
         }
+
+        public class Order
+        {
+            public const int MaxAdditionalRequirementsLength = 200;
+        }
     }
 }

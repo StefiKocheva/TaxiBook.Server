@@ -13,13 +13,12 @@
 
         public CompanyService(TaxiBookDbContext data) => this.data = data;
 
-        public async Task<string> Create(string name, string description, string userId)
+        public async Task<string> Create(string name, string description)
         {
             var company = new Company
             {
                 Name = name,
                 Description = description,
-                UserId = userId,
             };
 
             data.Add(company);
@@ -87,7 +86,7 @@
         private async Task<Company> GetByIdAndByUserId(string id, string userId) 
             => await this.data
                 .Companies
-                .Where(c => c.Id == id && c.UserId == userId)
+                .Where(c => c.Id == id && c.User == userId)
                 .FirstOrDefaultAsync();
     }
 }

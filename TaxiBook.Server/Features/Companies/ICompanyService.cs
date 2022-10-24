@@ -5,7 +5,7 @@
 
     public interface ICompanyService
     {
-        Task<string> Create(string name, string description, string userId);
+        Task<string> Create(string name, string description);
 
         Task<Result> Update(string id, string name, string description, string userId);
 

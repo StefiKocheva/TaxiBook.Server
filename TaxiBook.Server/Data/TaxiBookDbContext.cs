@@ -20,7 +20,11 @@
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         public DbSet<Profile> Profiles { get; set; }
+
+        public DbSet<Taxi> Taxies { get; set; }
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
@@ -39,11 +43,10 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
-                .Entity<Company>()
-                .HasQueryFilter(c => !c.IsDeleted)
-                .HasOne(c => c.User)
-                .WithMany(u => u.Companies)
-                .HasForeignKey(c => c.UserId)
+                .Entity<User>()
+                .HasOne(u => u.Company)
+                .WithMany(c => c.Employees)
+                .HasForeignKey(u => u.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
@@ -51,6 +54,34 @@
                 .HasOne(u => u.Profile)
                 .WithOne()
                 .HasForeignKey<Profile>(p => p.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Taxi>()
+                .HasOne(t => t.Company)
+                .WithMany(c => c.Taxies)
+                .HasForeignKey(t => t.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Taxi>()
+                .HasOne(t => t.Driver)
+                .WithMany(d => d.Taxies)
+                .HasForeignKey(t => t.DriverId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .Entity<Order>()
+                .HasOne(o => o.Company)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);

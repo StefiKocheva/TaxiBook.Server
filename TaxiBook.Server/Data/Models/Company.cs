@@ -23,9 +23,10 @@
         [MaxLength(MaxDescriptionLength)]
         public string Description { get; set; }
 
-        [Required]
-        public string UserId { get; set; }
+        public IEnumerable<User> Employees { get; set; } = new HashSet<User>();
 
-        public User User { get; set; }
+        public IEnumerable<Taxi> Taxies { get; set; } = new HashSet<Taxi>();
+
+        public IEnumerable<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }
